@@ -1,19 +1,41 @@
-# Zoey Knowledge Base
-version: "1.0.0"
-title: "test my life"
-description: ""
-created_at: "2025-09-16T17:58:23.619Z"
+# This file contains the knowledge base for the Zoey AI assistant.
+# It includes project-specific information, guidelines, and common queries
+# that Zoey can use to provide accurate and relevant responses.
 
-overview: |
-  Describe the end goal and what success looks like.
+# General project information
+- id: project_overview
+  title: "Project Description"
+  content: "This project is designed to showcase an AI coding assistant named Zoey. Zoey can understand code, answer questions, refactor, and generate new code based on user requests, while also learning from interactions."
+  tags: [project, overview, AI, assistant]
 
-requirements:
-  functional: [] # e.g., ["Users can X", "System shall Y"]
-  non_functional: [] # e.g., performance, security, accessibility
+- id: development_workflow
+  title: "Development Workflow"
+  content: "Development follows a standard Git branching model. Features are developed on separate branches, reviewed, and then merged into the main branch. Pull requests are mandatory for all changes."
+  tags: [workflow, git, development, PR]
 
-constraints: [] # frameworks, runtime, libraries, API limits
+# Zoey-specific knowledge
+- id: zoey_purpose
+  title: "Zoey's Core Purpose"
+  content: "Zoey's main purpose is to assist developers by automating repetitive coding tasks, providing code explanations, suggesting improvements, and helping maintain code quality and best practices."
+  tags: [Zoey, purpose, AI, assistant]
 
-acceptance_criteria: [] # clear, testable criteria
+- id: zoey_capabilities
+  title: "Zoey's Capabilities"
+  content: "Zoey can:
+    - Understand and analyze existing code.
+    - Generate new code snippets or full functions based on descriptions.
+    - Refactor code for readability and efficiency.
+    - Debug common errors.
+    - Answer questions about project structure and codebase."
+  tags: [Zoey, capabilities, features]
 
-notes: |
-  Add any context useful for the agent (data sources, domain language, etc.).
+# Common queries/FAQs
+- id: faq_add_new_feature
+  title: "How to add a new feature?"
+  content: "To add a new feature, create a new branch from 'main', implement your changes, ensure tests pass, and submit a pull request for review."
+  tags: [FAQ, feature, development, guide]
+
+- id: faq_run_tests
+  title: "How to run tests?"
+  content: "Tests can be run using the project's testing framework. Typically, you would execute 'npm test' or 'pytest' from the project root, depending on the language/framework used."
+  tags: [FAQ, tests, quality]
