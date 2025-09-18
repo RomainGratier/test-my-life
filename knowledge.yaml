@@ -1,22 +1,73 @@
-# This is a dummy knowledge base file in YAML format.
-# It serves as an example for structuring knowledge entries.
+# Specific Considerations & Hidden "Gotchas" for the Authentication Challenge
 
-sections:
-  - name: "Introduction"
-    content: "This is the first section of our dummy knowledge base. It provides a brief overview."
-    keywords: ["dummy", "intro", "overview"]
-  - name: "Dummy Part"
-    content: "This is a specific dummy part added as per request. It contains placeholder information."
-    details:
-      type: "placeholder"
-      status: "draft"
-      version: "1.0"
-    keywords: ["dummy", "placeholder", "example"]
-  - name: "Conclusion"
-    content: "Thank you for reviewing this dummy knowledge base file. More content can be added here."
-    keywords: ["dummy", "conclusion", "end"]
+authentication_challenge:
+  security:
+    password_requirements:
+      # All password requirements must be enforced on both client and server side.
+      - min_length: 12
+      - must_contain_uppercase: true
+      - must_contain_lowercase: true
+      - must_contain_number: true
+      - must_contain_special_char: true # e.g., !@#$%^&*()
+      - prevent_common_passwords: true # (conceptual, or implement a simple check for "password", "123456")
+    token_management:
+      # Access tokens should be short-lived (e.g., 15-30 minutes) and stored in memory or localStorage.
+      # They are sent with every API request via the Authorization: Bearer header.
+      # A more robust system would use long-lived refresh tokens stored in HTTP-only, secure cookies
+      # to obtain new access tokens when they expire. For this challenge, focus on secure access token
+      # handling. Acknowledge or sketch out the refresh token strategy if time permits.
+      access_token_storage_recommendation: "localStorage_or_memory_for_short_lived"
+      refresh_token_strategy_awareness: "httpOnly_cookie_for_long_lived_if_implemented"
+      jwt_secret_handling: "Must be loaded from environment variables, not hardcoded in source code."
+    rate_limiting:
+      login_attempts:
+        max_attempts: 5 # within a 5-minute window per IP address
+        block_duration_minutes: 15
+      # This is conceptual; a simple middleware or logic sketch for the backend is sufficient
+      # if full implementation is too time-consuming within the 2-hour limit.
+    sql_injection_prevention: "Mandatory: Use prepared statements or ORM's parameterized queries for all database interactions involving user input."
 
-metadata:
-  created_by: "AI Assistant"
-  date_created: "2023-10-27"
-  purpose: "Demonstration and placeholder content"
+  frontend:
+    css_specifics:
+      # The Login/Registration forms must reside within a specific "card" like container.
+      # This card should be centered both vertically and horizontally on larger screens (e.g., desktop).
+      # On mobile screens (width < 768px), the card should take up approximately 95% of the viewport width
+      # and have a fluid height, adapting to its content.
+      form_card_layout:
+        desktop: "centered_vertically_and_horizontally, fixed_max_width(400px)"
+        mobile: "full_width_95pct, fluid_height_auto_padding"
+      # Buttons must use a `linear-gradient` background. On hover, they should exhibit a subtle `box-shadow`
+      # effect and a slight `transform: translateY(-2px)` animation.
+      button_style: "linear_gradient_background, subtle_box_shadow_and_translateY_on_hover"
+      # Input fields must have a custom focus ring color (distinct from browser default)
+      # and a 1px solid border that changes color on focus.
+      input_focus: "custom_focus_ring_color, 1px_solid_border_color_change_on_focus"
+      # Implement a custom CSS animation for the dashboard's "Welcome, [Username]!" message.
+      # When the user successfully logs in and lands on the dashboard, this message should fade in
+      # and slide up slightly from the bottom, indicating a smooth transition.
+      dashboard_welcome_animation: "fade_in_slide_up_on_auth_success"
+
+    react_components:
+      # Ensure form validation is performed on the client-side *before* sending data to the server.
+      # However, explicitly acknowledge that server-side validation is the ultimate source of truth
+      # and is also required.
+      form_validation: "client_and_server_side_required"
+      # The application's main layout (e.g., a header, a main content area, and a footer)
+      # must be implemented using CSS Grid. The header should always be at the top, the footer at the bottom,
+      # and the main content area should take up the available space in between.
+      app_layout: "css_grid_for_main_layout_header_content_footer"
+
+  backend:
+    database:
+      # The 'username' column in the 'users' table must have a unique index.
+      # This is critical to prevent duplicate user registrations and to optimize login query performance.
+      users_table_indexes:
+        - "username: unique_index_for_performance_and_integrity"
+      # The password_hash column should be of TEXT type with sufficient length to accommodate bcrypt hashes.
+      # (e.g., 60-72 characters for typical bcrypt output).
+      password_hash_column_type: "TEXT(72)_or_similar_for_bcrypt"
+    error_handling:
+      # API responses for errors should be consistent (e.g., JSON object like { "error": "Descriptive message" })
+      # and use appropriate HTTP status codes (e.g., 400 Bad Request, 401 Unauthorized, 403 Forbidden,
+      # 404 Not Found, 409 Conflict for duplicate user, 500 Internal Server Error).
+      api_error_responses: "consistent_json_format_and_appropriate_http_status_codes"
