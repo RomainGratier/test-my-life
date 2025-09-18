@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Challenge Frontend</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Auth Challenge!</h1>
+    </header>
+    <main>
+        <p>This is the base frontend. You can find authentication-related functionality here once implemented.</p>
+        <div class="auth-section">
+            <h2>Authentication</h2>
+            <div id="login-section">
+                <h3>Login</h3>
+                <form id="login-form">
+                    <label for="login-username">Username:</label>
+                    <input type="text" id="login-username" name="username" required>
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" name="password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+            <div id="register-section">
+                <h3>Register</h3>
+                <form id="register-form">
+                    <label for="register-username">Username:</label>
+                    <input type="text" id="register-username" name="username" required>
+                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" name="password" required>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+            <p id="message"></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Auth Challenge</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
