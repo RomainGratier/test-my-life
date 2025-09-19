@@ -13,6 +13,122 @@ document.addEventListener('DOMContentLoaded', () => {
         messageElement.className = type; // 'info', 'success', 'error'
     }
 
+    // Helper function to get stored token
+    function getStoredToken() {
+        return localStorage.getItem('authToken');
+    }
+
+    // Helper function to store token
+    function storeToken(token) {
+        localStorage.setItem('authToken', token);
+    }
+
+    // Helper function to remove token
+    function removeToken() {
+        localStorage.removeItem('authToken');
+    }
+
+    // Helper function to make authenticated requests
+    function makeAuthenticatedRequest(url, options = {}) {
+        const token = getStoredToken();
+        if (!token) {
+            displayMessage('No authentication token found. Please log in.', 'error');
+            return Promise.reject('No token');
+        }
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            ...options.headers
+        };
+
+        return fetch(url, {
+            ...options,
+            headers
+        });
+    }
+
+    // Check if user is already logged in
+    function checkAuthStatus() {
+        const token = getStoredToken();
+        if (token) {
+            // Verify token is still valid
+            fetch(`${API_BASE_URL}/auth/verify`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.valid) {
+                    displayMessage(`Welcome back, ${data.user.username}!`, 'success');
+                    // Show profile button or user info
+                    showUserInterface(data.user);
+                } else {
+                    removeToken();
+                    displayMessage('Session expired. Please log in again.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Auth check failed:', error);
+                removeToken();
+            });
+        }
+    }
+
+    // Show user interface elements
+    function showUserInterface(user) {
+        // Create or update user info display
+        let userInfo = document.getElementById('user-info');
+        if (!userInfo) {
+            userInfo = document.createElement('div');
+            userInfo.id = 'user-info';
+            userInfo.style.marginTop = '20px';
+            userInfo.style.padding = '10px';
+            userInfo.style.backgroundColor = '#f0f0f0';
+            userInfo.style.borderRadius = '5px';
+            document.body.appendChild(userInfo);
+        }
+        
+        userInfo.innerHTML = `
+            <h3>Welcome, ${user.username}!</h3>
+            <p>User ID: ${user.id}</p>
+            <button onclick="getProfile()" style="margin-right: 10px;">Get Profile</button>
+            <button onclick="logout()">Logout</button>
+        `;
+    }
+
+    // Global functions for buttons
+    window.getProfile = function() {
+        makeAuthenticatedRequest(`${API_BASE_URL}/auth/profile`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.user) {
+                    displayMessage(`Profile: ${data.user.username} (created: ${new Date(data.user.createdAt).toLocaleDateString()})`, 'success');
+                } else {
+                    displayMessage(data.message || 'Failed to get profile', 'error');
+                }
+            })
+            .catch(error => {
+                displayMessage('Failed to get profile', 'error');
+                console.error('Profile error:', error);
+            });
+    };
+
+    window.logout = function() {
+        removeToken();
+        displayMessage('Logged out successfully', 'success');
+        const userInfo = document.getElementById('user-info');
+        if (userInfo) {
+            userInfo.remove();
+        }
+    };
+
+    // Check authentication status on page load
+    checkAuthStatus();
+
     // Login functionality
     if (loginForm) {
         loginForm.addEventListener('submit', async (event) => {
@@ -34,8 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
 
                 if (response.ok) {
-                    displayMessage(`Login successful! Token: ${data.token}`, 'success');
-                    // In a real app, you'd store the token (e.g., in localStorage)
+                    storeToken(data.token);
+                    displayMessage(`Login successful! Welcome, ${data.user.username}!`, 'success');
+                    showUserInterface(data.user);
                     console.log('Login successful:', data);
                 } else {
                     displayMessage(`Login failed: ${data.message || 'Unknown error'}`, 'error');
@@ -69,10 +186,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
 
                 if (response.ok) {
-                    displayMessage(`Registration successful! User ID: ${data.userId}`, 'success');
+                    displayMessage(`Registration successful! You can now log in with username: ${data.username}`, 'success');
                     console.log('Registration successful:', data);
                 } else {
-                    displayMessage(`Registration failed: ${data.message || 'Unknown error'}`, 'error');
+                    if (data.errors && data.errors.length > 0) {
+                        displayMessage(`Registration failed: ${data.errors.join(', ')}`, 'error');
+                    } else {
+                        displayMessage(`Registration failed: ${data.message || 'Unknown error'}`, 'error');
+                    }
                     console.error('Registration failed:', data);
                 }
             } catch (error) {
