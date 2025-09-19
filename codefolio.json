@@ -1,0 +1,13 @@
+{
+  "project": "Auth Challenge",
+  "description": "A simple authentication challenge with Node.js backend and frontend",
+  "greeting": "Hello Romain! 👋",
+  "message": "Welcome to the codefolio! This is a simple greeting added to the project.",
+  "created": "2024",
+  "features": [
+    "Authentication system",
+    "Node.js Express backend",
+    "Simple frontend interface"
+  ],
+  "status": "active"
+}
