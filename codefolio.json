@@ -9,5 +9,6 @@
     "Node.js Express backend",
     "Simple frontend interface"
   ],
+  "resume": "This codefolio documents our authentication challenge project. We will build a complete authentication system with secure user registration, login functionality, and protected routes. The implementation includes a Node.js Express backend with JWT token management and a clean frontend interface for user interaction. Our goal is to create a production-ready authentication solution that demonstrates best practices in web security.",
   "status": "active"
 }
