@@ -1,14 +1,19 @@
 {
   "project": "Auth Challenge",
-  "description": "A simple authentication challenge with Node.js backend and frontend",
+  "description": "A full-stack authentication system demonstrating secure user management with JWT tokens, password hashing, and protected routes",
   "greeting": "Hello Romain! 👋",
   "message": "Welcome to the codefolio! This is a simple greeting added to the project.",
   "created": "2024",
   "features": [
-    "Authentication system",
-    "Node.js Express backend",
-    "Simple frontend interface"
+    "Secure user registration with input validation",
+    "JWT-based authentication with 24h token expiration",
+    "bcrypt password hashing with 12 salt rounds",
+    "Protected API routes with middleware authentication",
+    "RESTful API design with comprehensive error handling",
+    "Responsive frontend with clean user interface",
+    "CORS-enabled full-stack communication",
+    "Token verification endpoint for client-side validation"
   ],
-  "resume": "This codefolio documents our authentication challenge project. We will build a complete authentication system with secure user registration, login functionality, and protected routes. The implementation includes a Node.js Express backend with JWT token management and a clean frontend interface for user interaction. Our goal is to create a production-ready authentication solution that demonstrates best practices in web security.",
+  "resume": "This codefolio showcases a production-ready authentication system built with modern web technologies. The project demonstrates expertise in full-stack development through a secure Node.js Express backend featuring JWT token management, bcrypt password hashing, and comprehensive input validation. The frontend provides an intuitive user interface for registration and login, while the API implements RESTful design principles with proper error handling and CORS configuration. This implementation serves as a foundation for scalable web applications requiring secure user authentication, highlighting best practices in web security and API design.",
   "status": "active"
 }
