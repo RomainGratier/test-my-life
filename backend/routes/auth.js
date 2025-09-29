@@ -25,10 +25,23 @@ function validateInput(username, password) {
     
     if (!password || password.length === 0) {
         errors.push('Password is required');
-    } else if (password.length < 6) {
-        errors.push('Password must be at least 6 characters long');
-    } else if (password.length > 100) {
-        errors.push('Password must be less than 100 characters');
+    } else {
+        // TODO: Implement enterprise password requirements:
+        // - Minimum 12 characters (currently 6)
+        // - Must contain uppercase letters
+        // - Must contain lowercase letters
+        // - Must contain numbers
+        // - Must contain special characters (!@#$%^&*())
+        // - Prevent common passwords
+        
+        if (password.length < 12) { // TODO: Change from 6 to 12
+            errors.push('Password must be at least 12 characters long');
+        } else if (password.length > 100) {
+            errors.push('Password must be less than 100 characters');
+        }
+        
+        // TODO: Add password complexity validation
+        // TODO: Add common password prevention
     }
     
     return errors;
@@ -39,7 +52,7 @@ function generateToken(userId, username) {
     return jwt.sign(
         { userId, username },
         JWT_SECRET,
-        { expiresIn: '24h' }
+        { expiresIn: '24h' } // TODO: Change to short-lived token (15-30 minutes)
     );
 }
 

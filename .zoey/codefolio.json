@@ -1,49 +1,53 @@
 {
   "version": "1.0.0",
-  "title": "Authentication Challenge — Codefolio",
-  "description": "A production-ready full-stack authentication system featuring enterprise-grade security with JWT token management, bcrypt password hashing, comprehensive input validation, protected API routes, and seamless frontend-backend integration",
+  "title": "Enterprise Authentication Challenge: Developer Guide",
+  "description": "This codefolio serves as a comprehensive guide for the 'Enterprise Authentication Challenge', outlining the requirements, evaluation criteria, and partially implemented features for developers to complete a production-ready authentication system.",
   "created_at": "2025-01-27T00:00:00.000Z",
   "highlights": [
-    "Robust full-stack authentication with JWT & bcrypt hashing",
-    "Secure user registration, input validation, and protected API routes",
-    "Node.js Express backend with RESTful API design & error handling",
-    "Responsive frontend featuring clean UI and client-side token validation"
+    "Implement enterprise-grade security features for authentication",
+    "Apply advanced CSS styling and responsive design principles",
+    "Develop robust code architecture for both frontend and backend",
+    "Ensure comprehensive functionality, validation, and error handling"
   ],
   "sections": [
     {
       "id": "overview",
       "type": "text",
       "title": "Challenge Overview",
-      "content": "This portfolio documents the implementation of a complete authentication challenge featuring a Node.js Express backend with secure authentication routes and a modern frontend interface. The system includes user registration, login functionality, and token-based authentication with proper error handling and security considerations."
+      "content": "You are tasked with implementing a complete authentication system that meets enterprise security standards. This challenge evaluates your skills in Security Implementation (40%), CSS Styling & UI/UX (25%), Code Architecture (20%), and Functionality & Edge Cases (15%)."
     },
     {
       "id": "approach",
       "type": "text",
-      "title": "Technical Approach",
-      "content": "The implementation follows a full-stack architecture with clear separation of concerns. The backend uses Express.js with CORS enabled for cross-origin requests, implements RESTful API design with proper HTTP status codes, and includes comprehensive error handling. The frontend uses vanilla JavaScript with modern ES6+ features, implements responsive design with CSS Grid, and provides real-time user feedback through dynamic message displays."
+      "title": "Current Implementation Status & Your Task",
+      "content": {
+        "text": "**What's Already Implemented:**\n- Basic Express.js backend with authentication routes\n- JWT token generation and verification\n- bcrypt password hashing\n- Basic frontend with login/register forms\n- CORS configuration\n- Basic error handling\n\n**What You Need to Implement:**\n- Enterprise password policies (12+ chars, complexity requirements)\n- Advanced CSS styling (gradient buttons, card layouts, responsive design)\n- Comprehensive input validation (client & server-side)\n- Rate limiting and security enhancements\n- CSS Grid layout for main application structure\n- Custom animations and improved UX\n- Production-ready error handling",
+        "format": "markdown"
+      }
     },
     {
       "id": "implementation",
       "type": "text",
-      "title": "Key Implementation Details",
+      "title": "Detailed Requirements",
       "content": {
-        "text": "**Backend Architecture:**\n- Express.js server with middleware for CORS and JSON parsing\n- Modular route structure with dedicated auth routes\n- Environment variable configuration for security\n- Comprehensive error handling with appropriate HTTP status codes\n- Secure password hashing with `bcrypt` for user credentials\n- JWT token generation and management for authentication and session control\n- Robust input validation for user credentials (username, password)\n\n**Frontend Features:**\n- Responsive design with CSS Grid layout\n- Form validation and user feedback system\n- Asynchronous API communication with fetch API\n- Dynamic message display with success/error states\n\n**Security Considerations:**\n- Password hashing (`bcrypt`) for securely storing user credentials\n- JWT-based authentication for secure, stateless session management\n- Detailed input validation on both client and server side to prevent common vulnerabilities\n- Proper error message handling without information leakage\n- CORS configuration for secure cross-origin requests\n- Environment-based configuration management for sensitive data (e.g., JWT secret)",
+        "text": "**🔐 Security Requirements:**\n\n**Password Policies:**\n- Minimum 12 characters\n- Must contain uppercase letters\n- Must contain lowercase letters\n- Must contain numbers\n- Must contain special characters (!@#$%^&*())\n- Prevent common passwords (password, 123456, etc.)\n- Enforce on both client and server side\n\n**Token Management:**\n- Short-lived access tokens (15-30 minutes recommended)\n- Proper token storage (localStorage or memory)\n- Refresh token strategy awareness (HTTP-only cookies for long-lived tokens)\n- JWT secret from environment variables (never hardcoded)\n\n**Security Features:**\n- Rate limiting: Max 5 login attempts per 5-minute window per IP\n- SQL injection prevention: Use parameterized queries\n- Comprehensive input validation with regex patterns\n- Proper HTTP status codes (400, 401, 403, 404, 409, 500)\n\n**🎨 CSS & Styling Requirements:**\n\n**Form Card Layout:**\n- Desktop: Centered vertically and horizontally, max-width 400px\n- Mobile: 95% viewport width, fluid height with auto padding\n\n**Button Styling:**\n- Linear gradient background\n- Subtle box-shadow on hover\n- transform: translateY(-2px) on hover\n\n**Input Fields:**\n- Custom focus ring color (distinct from browser default)\n- 1px solid border that changes color on focus\n\n**Layout & Animations:**\n- CSS Grid for main layout (header, content, footer)\n- Dashboard welcome animation: Fade in and slide up from bottom\n- Responsive design for all screen sizes\n\n**🏛️ Architecture Requirements:**\n\n**Frontend:**\n- Client-side form validation before server requests\n- Server-side validation as ultimate source of truth\n- CSS Grid for main application layout\n- Modular component structure\n\n**Backend:**\n- Unique username index for performance and integrity\n- TEXT(72) password hash column for bcrypt compatibility\n- Consistent JSON error responses\n- Proper HTTP status codes\n- Environment variable configuration",
         "format": "markdown"
       }
     },
     {
       "id": "results",
       "type": "text",
-      "title": "Results and Learnings",
-      "content": "The authentication challenge successfully demonstrates a complete full-stack implementation with proper separation of concerns, security best practices, and modern web development techniques. Key learnings include the importance of comprehensive error handling, the value of modular architecture in Express.js applications, and the effectiveness of vanilla JavaScript for building interactive frontend experiences. The project showcases clean code organization, responsive design principles, and proper API design patterns that can be extended for production applications."
+      "title": "Evaluation Criteria",
+      "content": {
+        "text": "Your implementation will be evaluated based on the following weighted criteria:\n- **Security Implementation:** 40% of evaluation (e.g., password policies, rate limiting, token management)\n- **CSS Styling & UI/UX:** 25% of evaluation (e.g., responsive design, custom animations, form layout)\n- **Code Architecture:** 20% of evaluation (e.g., modularity, validation, error handling, database design)\n- **Functionality & Edge Cases:** 15% of evaluation (e.g., full feature completion, robust error handling, input validation)",
+        "format": "markdown"
+      }
     },
     {
       "id": "project-summary",
       "type": "text",
-      "title": "Project Summary",
-      "content": {
-        "text": "This codefolio demonstrates mastery of modern full-stack web development through a sophisticated authentication system that exemplifies production-grade security practices. The Node.js Express backend showcases advanced security implementation with JWT token management (24h expiration), bcrypt password hashing (12 salt rounds), comprehensive input validation with regex patterns, and middleware-based route protection. The system features enterprise-level error handling, RESTful API design, CORS configuration, and in-memory user management with proper data structures. The responsive frontend integrates seamlessly with the backend, implementing token-based authentication, localStorage management, automatic session validation, and dynamic UI updates. This implementation represents a complete, scalable foundation for secure web applications, highlighting expertise in web security, API architecture, and modern JavaScript development practices."
-      }
+      "title": "Challenge Summary & Scope",
+      "content": "This challenge requires the development of a production-ready full-stack authentication system. It encompasses securing user data with advanced password policies, implementing robust token management, safeguarding against common web vulnerabilities like rate limiting and SQL injection, and ensuring a seamless, responsive user experience with modern CSS and animations. The focus is on demonstrating comprehensive skills in secure development practices, clean architecture, and effective UI/UX design within a Node.js Express backend and vanilla JavaScript frontend environment."
     }
   ]
 }

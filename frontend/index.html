@@ -11,9 +11,24 @@
         <h1>Welcome to the Auth Challenge!</h1>
     </header>
     <main>
-        <p>This is the base frontend. You can find authentication-related functionality here once implemented.</p>
+        <div class="challenge-info">
+            <h2>🚀 Enterprise Authentication Challenge</h2>
+            <p><strong>Your Task:</strong> Complete the authentication system with enterprise-grade security and advanced CSS styling.</p>
+            <div class="requirements-summary">
+                <h3>Key Requirements:</h3>
+                <ul>
+                    <li>🔐 <strong>Password Policy:</strong> 12+ chars, uppercase, lowercase, numbers, special chars</li>
+                    <li>🎨 <strong>CSS Styling:</strong> Gradient buttons, card layouts, custom focus rings, CSS Grid</li>
+                    <li>🛡️ <strong>Security:</strong> Rate limiting, input validation, proper error handling</li>
+                    <li>📱 <strong>Responsive:</strong> Mobile-first design with specific breakpoints</li>
+                </ul>
+            </div>
+        </div>
+        
         <div class="auth-section">
-            <h2>Authentication</h2>
+            <h2>Authentication Forms</h2>
+            <p class="implementation-note">⚠️ <strong>Note:</strong> These forms need styling improvements and enhanced validation. See CHALLENGE_GUIDE.md for details.</p>
+            
             <div id="login-section">
                 <h3>Login</h3>
                 <form id="login-form">
@@ -24,6 +39,7 @@
                     <button type="submit">Login</button>
                 </form>
             </div>
+            
             <div id="register-section">
                 <h3>Register</h3>
                 <form id="register-form">
@@ -33,8 +49,19 @@
                     <input type="password" id="register-password" name="password" required>
                     <button type="submit">Register</button>
                 </form>
+                <p class="password-requirements">⚠️ <strong>Password Requirements:</strong> Minimum 12 characters with uppercase, lowercase, numbers, and special characters (!@#$%^&*())</p>
             </div>
+            
             <p id="message"></p>
+        </div>
+        
+        <!-- Dashboard section - appears after successful login -->
+        <div id="dashboard" style="display: none;">
+            <h2>Dashboard</h2>
+            <div class="welcome-message">
+                <h3>Welcome to your dashboard!</h3>
+                <p>This section should have a fade-in slide-up animation when displayed.</p>
+            </div>
         </div>
     </main>
     <footer>

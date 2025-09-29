@@ -1,23 +1,42 @@
 {
-  "project": "Auth Challenge",
-  "description": "A production-ready full-stack authentication system featuring enterprise-grade security with JWT token management, bcrypt password hashing, comprehensive input validation, protected API routes, and seamless frontend-backend integration",
-  "greeting": "Hello Romain! 👋",
-  "message": "Welcome to the codefolio! This is a simple greeting added to the project.",
+  "project": "Enterprise Authentication Challenge",
+  "description": "A comprehensive full-stack authentication challenge testing enterprise-grade security implementation, advanced CSS styling, and modern web development practices. Developers must implement secure password policies, JWT token management, responsive design patterns, and production-ready error handling.",
+  "greeting": "Welcome to the Authentication Challenge! 🚀",
+  "message": "This challenge tests your ability to implement enterprise-grade authentication systems with specific security requirements, advanced CSS styling, and modern web development patterns. You'll be evaluated on security implementation, UI/UX design, and code architecture.",
   "created": "2024",
-  "features": [
-    "Enterprise-grade user registration with comprehensive input validation and regex pattern matching",
-    "JWT-based authentication system with 24h token expiration and secure token generation",
-    "bcrypt password hashing with 12 salt rounds for maximum security",
-    "Protected API routes with middleware-based authentication and authorization",
-    "RESTful API design with comprehensive error handling and proper HTTP status codes",
-    "Responsive frontend with dynamic UI updates and seamless user experience",
-    "CORS-enabled full-stack communication with proper cross-origin configuration",
-    "Token verification endpoint for client-side session validation and management",
-    "In-memory user storage with Map-based data structures for efficient lookups",
-    "Automatic session management with localStorage integration and token persistence",
-    "Production-ready error handling with detailed logging and user-friendly messages",
-    "Modular architecture with separated concerns and clean code organization"
+  "challenge_focus": "Enterprise Authentication Implementation",
+  "main_testing_areas": [
+    "Security Implementation: Password policies, JWT token management, input validation, rate limiting awareness",
+    "CSS Styling: Card layouts, gradient buttons, custom focus rings, responsive design, CSS Grid layouts",
+    "Frontend Architecture: Form validation, component structure, authentication state management",
+    "Backend Security: bcrypt hashing, SQL injection prevention, proper error handling, API design",
+    "Production Readiness: Environment variables, error responses, logging, modular architecture"
   ],
-  "resume": "This codefolio demonstrates mastery of modern full-stack web development through a sophisticated authentication system that exemplifies production-grade security practices. The Node.js Express backend showcases advanced security implementation with JWT token management (24h expiration), bcrypt password hashing (12 salt rounds), comprehensive input validation with regex patterns, and middleware-based route protection. The system features enterprise-level error handling, RESTful API design, CORS configuration, and in-memory user management with proper data structures. The responsive frontend integrates seamlessly with the backend, implementing token-based authentication, localStorage management, automatic session validation, and dynamic UI updates. This implementation represents a complete, scalable foundation for secure web applications, highlighting expertise in web security, API architecture, and modern JavaScript development practices.",
+  "key_requirements": [
+    "Password Requirements: Min 12 chars, uppercase, lowercase, numbers, special characters, common password prevention",
+    "Token Management: Short-lived access tokens, proper storage, refresh token strategy awareness",
+    "CSS Requirements: Centered card layouts, gradient buttons with hover effects, custom focus rings, CSS Grid main layout",
+    "Security Features: Rate limiting, SQL injection prevention, comprehensive input validation, proper HTTP status codes",
+    "UI/UX: Responsive design, dashboard animations, form validation, error handling"
+  ],
+  "evaluation_criteria": [
+    "Security Implementation Quality (40%): Password policies, token handling, input validation, error handling",
+    "CSS and Styling (25%): Card layouts, button styling, responsive design, animations",
+    "Code Architecture (20%): Modular structure, error handling, API design, best practices",
+    "Functionality (15%): Complete authentication flow, user experience, edge case handling"
+  ],
+  "features": [
+    "Enterprise-grade password policies with comprehensive validation",
+    "JWT token management with proper expiration and storage strategies",
+    "Advanced CSS styling with gradient buttons and responsive card layouts",
+    "Comprehensive input validation on both client and server sides",
+    "Protected API routes with middleware-based authentication",
+    "Production-ready error handling with proper HTTP status codes",
+    "Responsive frontend with CSS Grid layout and custom animations",
+    "Security best practices including bcrypt hashing and rate limiting awareness",
+    "Modular architecture with separated concerns and clean code organization",
+    "Complete authentication flow with registration, login, and profile management"
+  ],
+  "resume": "This authentication challenge evaluates comprehensive full-stack development skills through enterprise-grade security implementation. Candidates must demonstrate mastery of modern web security practices including advanced password policies, JWT token management, bcrypt password hashing, and comprehensive input validation. The challenge tests CSS expertise through specific styling requirements: responsive card layouts, gradient button implementations, custom focus rings, and CSS Grid architecture. Frontend development skills are evaluated through form validation, authentication state management, and responsive design patterns. Backend security implementation focuses on proper error handling, API design, SQL injection prevention, and production-ready practices. This challenge represents a complete assessment of modern web development capabilities, emphasizing both technical implementation and user experience design.",
   "status": "active"
 }

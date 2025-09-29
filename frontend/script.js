@@ -165,12 +165,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // TODO: Implement comprehensive password validation
+    function validatePassword(password) {
+        const errors = [];
+        
+        // TODO: Implement all password requirements:
+        // - Minimum 12 characters
+        // - Must contain uppercase letters
+        // - Must contain lowercase letters
+        // - Must contain numbers
+        // - Must contain special characters (!@#$%^&*())
+        // - Prevent common passwords
+        
+        if (password.length < 12) {
+            errors.push('Password must be at least 12 characters long');
+        }
+        
+        // TODO: Add remaining validation checks
+        
+        return errors;
+    }
+
     // Register functionality
     if (registerForm) {
         registerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const username = event.target['register-username'].value;
             const password = event.target['register-password'].value;
+
+            // TODO: Implement client-side validation before server request
+            const passwordErrors = validatePassword(password);
+            if (passwordErrors.length > 0) {
+                displayMessage(`Password validation failed: ${passwordErrors.join(', ')}`, 'error');
+                return;
+            }
 
             displayMessage('Attempting registration...', 'info');
 
