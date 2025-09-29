@@ -80,6 +80,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show user interface elements
     function showUserInterface(user) {
+        // Hide authentication forms
+        const authSection = document.querySelector('.auth-section');
+        if (authSection) {
+            authSection.style.display = 'none';
+        }
+        
+        // Show dashboard with animation
+        const dashboard = document.getElementById('dashboard');
+        if (dashboard) {
+            dashboard.style.display = 'block';
+            // Trigger animation by adding class
+            const welcomeMessage = dashboard.querySelector('.welcome-message');
+            if (welcomeMessage) {
+                welcomeMessage.style.opacity = '0';
+                welcomeMessage.style.transform = 'translateY(20px)';
+                // Force reflow to ensure animation starts
+                welcomeMessage.offsetHeight;
+                welcomeMessage.style.animation = 'fadeInSlideUp 0.6s ease forwards';
+            }
+        }
+        
         // Create or update user info display
         let userInfo = document.getElementById('user-info');
         if (!userInfo) {
@@ -120,6 +141,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.logout = function() {
         removeToken();
         displayMessage('Logged out successfully', 'success');
+        
+        // Hide dashboard and show auth forms
+        const dashboard = document.getElementById('dashboard');
+        if (dashboard) {
+            dashboard.style.display = 'none';
+        }
+        
+        const authSection = document.querySelector('.auth-section');
+        if (authSection) {
+            authSection.style.display = 'block';
+        }
+        
         const userInfo = document.getElementById('user-info');
         if (userInfo) {
             userInfo.remove();
@@ -135,6 +168,13 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             const username = event.target['login-username'].value;
             const password = event.target['login-password'].value;
+
+            // Client-side validation before server request
+            const validationErrors = validateForm(username, password);
+            if (validationErrors.length > 0) {
+                displayMessage(`Validation failed: ${validationErrors.join(', ')}`, 'error');
+                return;
+            }
 
             displayMessage('Attempting login...', 'info');
 
@@ -165,24 +205,75 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // TODO: Implement comprehensive password validation
+    // Comprehensive password validation with enterprise requirements
     function validatePassword(password) {
         const errors = [];
         
-        // TODO: Implement all password requirements:
-        // - Minimum 12 characters
-        // - Must contain uppercase letters
-        // - Must contain lowercase letters
-        // - Must contain numbers
-        // - Must contain special characters (!@#$%^&*())
-        // - Prevent common passwords
-        
-        if (password.length < 12) {
-            errors.push('Password must be at least 12 characters long');
+        if (!password || password.length === 0) {
+            errors.push('Password is required');
+            return errors;
         }
         
-        // TODO: Add remaining validation checks
+        // Length validation
+        if (password.length < 12) {
+            errors.push('Password must be at least 12 characters long');
+        } else if (password.length > 100) {
+            errors.push('Password must be less than 100 characters');
+        }
         
+        // Complexity validation
+        if (!/[A-Z]/.test(password)) {
+            errors.push('Password must contain at least one uppercase letter');
+        }
+        
+        if (!/[a-z]/.test(password)) {
+            errors.push('Password must contain at least one lowercase letter');
+        }
+        
+        if (!/[0-9]/.test(password)) {
+            errors.push('Password must contain at least one number');
+        }
+        
+        if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+            errors.push('Password must contain at least one special character (!@#$%^&*())');
+        }
+        
+        // Common password prevention
+        const commonPasswords = [
+            'password', '123456', 'password123', 'admin', 'qwerty',
+            'letmein', 'welcome', 'monkey', '1234567890', 'abc123',
+            'password1', '123123', 'dragon', 'master', 'hello'
+        ];
+        
+        if (commonPasswords.includes(password.toLowerCase())) {
+            errors.push('Password is too common. Please choose a more secure password');
+        }
+        
+        return errors;
+    }
+    
+    // Username validation
+    function validateUsername(username) {
+        const errors = [];
+        
+        if (!username || username.trim().length === 0) {
+            errors.push('Username is required');
+        } else if (username.length < 3) {
+            errors.push('Username must be at least 3 characters long');
+        } else if (username.length > 20) {
+            errors.push('Username must be less than 20 characters');
+        } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+            errors.push('Username can only contain letters, numbers, and underscores');
+        }
+        
+        return errors;
+    }
+    
+    // Complete form validation
+    function validateForm(username, password) {
+        const errors = [];
+        errors.push(...validateUsername(username));
+        errors.push(...validatePassword(password));
         return errors;
     }
 
@@ -193,10 +284,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const username = event.target['register-username'].value;
             const password = event.target['register-password'].value;
 
-            // TODO: Implement client-side validation before server request
-            const passwordErrors = validatePassword(password);
-            if (passwordErrors.length > 0) {
-                displayMessage(`Password validation failed: ${passwordErrors.join(', ')}`, 'error');
+            // Client-side validation before server request
+            const validationErrors = validateForm(username, password);
+            if (validationErrors.length > 0) {
+                displayMessage(`Validation failed: ${validationErrors.join(', ')}`, 'error');
                 return;
             }
 

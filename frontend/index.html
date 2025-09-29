@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Auth Challenge!</h1>
-    </header>
-    <main>
+    <div class="app-container">
+        <header>
+            <h1>Welcome to the Auth Challenge!</h1>
+        </header>
+        <main>
         <div class="challenge-info">
             <h2>🚀 Enterprise Authentication Challenge</h2>
             <p><strong>Your Task:</strong> Complete the authentication system with enterprise-grade security and advanced CSS styling.</p>
@@ -30,26 +31,30 @@
             <p class="implementation-note">⚠️ <strong>Note:</strong> These forms need styling improvements and enhanced validation. See CHALLENGE_GUIDE.md for details.</p>
             
             <div id="login-section">
-                <h3>Login</h3>
-                <form id="login-form">
-                    <label for="login-username">Username:</label>
-                    <input type="text" id="login-username" name="username" required>
-                    <label for="login-password">Password:</label>
-                    <input type="password" id="login-password" name="password" required>
-                    <button type="submit">Login</button>
-                </form>
+                <div class="auth-card">
+                    <h3>Login</h3>
+                    <form id="login-form">
+                        <label for="login-username">Username:</label>
+                        <input type="text" id="login-username" name="username" required>
+                        <label for="login-password">Password:</label>
+                        <input type="password" id="login-password" name="password" required>
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
             </div>
             
             <div id="register-section">
-                <h3>Register</h3>
-                <form id="register-form">
-                    <label for="register-username">Username:</label>
-                    <input type="text" id="register-username" name="username" required>
-                    <label for="register-password">Password:</label>
-                    <input type="password" id="register-password" name="password" required>
-                    <button type="submit">Register</button>
-                </form>
-                <p class="password-requirements">⚠️ <strong>Password Requirements:</strong> Minimum 12 characters with uppercase, lowercase, numbers, and special characters (!@#$%^&*())</p>
+                <div class="auth-card">
+                    <h3>Register</h3>
+                    <form id="register-form">
+                        <label for="register-username">Username:</label>
+                        <input type="text" id="register-username" name="username" required>
+                        <label for="register-password">Password:</label>
+                        <input type="password" id="register-password" name="password" required>
+                        <button type="submit">Register</button>
+                    </form>
+                    <p class="password-requirements">⚠️ <strong>Password Requirements:</strong> Minimum 12 characters with uppercase, lowercase, numbers, and special characters (!@#$%^&*())</p>
+                </div>
             </div>
             
             <p id="message"></p>
@@ -63,10 +68,11 @@
                 <p>This section should have a fade-in slide-up animation when displayed.</p>
             </div>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2023 Auth Challenge</p>
-    </footer>
+        </main>
+        <footer>
+            <p>&copy; 2023 Auth Challenge</p>
+        </footer>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

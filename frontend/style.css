@@ -10,12 +10,18 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
-    display: flex; /* TODO: Change to CSS Grid */
-    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* CSS Grid layout for main application structure */
+.app-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
 
 header {
+    grid-row: 1;
     background-color: #333;
     color: #fff;
     padding: 1rem 0;
@@ -23,7 +29,7 @@ header {
 }
 
 main {
-    flex: 1; /* TODO: Update for CSS Grid */
+    grid-row: 2;
     padding: 20px;
     max-width: 800px;
     margin: 20px auto;
@@ -92,22 +98,32 @@ main {
     margin-bottom: 15px;
 }
 
-/* 
- * TODO: Implement card layout requirements
- * Desktop: Centered vertically and horizontally, max-width 400px
- * Mobile: 95% viewport width, fluid height with auto padding
- */
+/* Card layout for authentication forms */
+.auth-card {
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    max-width: 300px; /* TODO: Update to 400px for desktop */
-    margin: 0 auto 20px auto;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    /* TODO: Add centering for desktop, responsive width for mobile */
+    gap: 15px;
+}
+
+/* Desktop layout - centered vertically and horizontally */
+@media (min-width: 769px) {
+    .auth-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+    }
 }
 
 label {
@@ -115,40 +131,41 @@ label {
     margin-bottom: 5px;
 }
 
-/* 
- * TODO: Implement custom focus ring styling
- * Requirements: Custom focus ring color (distinct from browser default)
- * 1px solid border that changes color on focus
- */
+/* Custom focus ring styling for input fields */
 input[type="text"],
 input[type="password"] {
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    width: calc(100% - 22px);
-    /* TODO: Add custom focus styling */
+    width: calc(100% - 26px);
+    transition: border-color 0.3s ease;
+    font-size: 16px;
 }
 
-/* 
- * TODO: Implement gradient button styling
- * Requirements: Linear gradient background
- * Subtle box-shadow on hover
- * transform: translateY(-2px) on hover
- */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Gradient button styling with linear gradient background */
 button {
-    background-color: #007bff; /* TODO: Change to linear gradient */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 10px 15px;
+    padding: 12px 24px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
-    /* TODO: Add gradient background and hover effects */
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 button:hover {
-    background-color: #0056b3; /* TODO: Add box-shadow and translateY effects */
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px);
 }
 
 #message {
@@ -175,29 +192,52 @@ button:hover {
 }
 
 
-/* 
- * TODO: Implement dashboard welcome animation
- * Requirements: Fade in and slide up from bottom when user logs in
- */
+/* Dashboard welcome animation */
 .welcome-message {
-    /* TODO: Add initial state (opacity: 0, transform: translateY(20px)) */
-    /* TODO: Add animation keyframes for fadeInSlideUp */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUp 0.6s ease forwards;
 }
 
-/* TODO: Add @keyframes fadeInSlideUp animation */
+@keyframes fadeInSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 footer {
+    grid-row: 3;
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 1rem 0;
-    margin-top: auto;
 }
 
-/* 
- * TODO: Add responsive design for mobile
- * Requirements: Forms should be 95% width on mobile (width < 768px)
- */
+/* Mobile responsive design */
 @media (max-width: 768px) {
-    /* TODO: Add mobile-specific styles */
+    .auth-card {
+        width: 95%;
+        height: auto;
+        padding: 20px;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: 20px auto;
+    }
+    
+    main {
+        padding: 10px;
+        margin: 10px auto;
+    }
+    
+    .challenge-info {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .requirements-summary {
+        padding: 10px;
+    }
 }
