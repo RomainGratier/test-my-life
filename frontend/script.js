@@ -7,10 +7,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const API_BASE_URL = window.location.origin; // This assumes backend serves frontend, adjust if different ports/domains
 
-    // Helper function to display messages
+    // Helper function to display messages with animations
     function displayMessage(msg, type = 'info') {
         messageElement.textContent = msg;
-        messageElement.className = type; // 'info', 'success', 'error'
+        messageElement.className = `${type} message-slide-in`;
+        
+        // Add specific animations based on message type
+        if (type === 'success') {
+            messageElement.classList.add('success-pulse');
+        } else if (type === 'error') {
+            messageElement.classList.add('error-shake');
+        }
+        
+        // Clear animations after they complete
+        setTimeout(() => {
+            messageElement.classList.remove('message-slide-in', 'success-pulse', 'error-shake');
+        }, 600);
     }
 
     // Helper function to get stored token
@@ -164,6 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Login functionality
     if (loginForm) {
+        // Store original button text
+        const loginButton = loginForm.querySelector('button[type="submit"]');
+        loginButton.dataset.originalText = loginButton.textContent;
+        
         loginForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const username = event.target['login-username'].value;
@@ -176,6 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Set loading state
+            setFormLoading(loginForm, true);
             displayMessage('Attempting login...', 'info');
 
             try {
@@ -201,6 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 displayMessage(`Network error during login: ${error.message}`, 'error');
                 console.error('Network error:', error);
+            } finally {
+                // Clear loading state
+                setFormLoading(loginForm, false);
             }
         });
     }
@@ -277,8 +298,97 @@ document.addEventListener('DOMContentLoaded', () => {
         return errors;
     }
 
+    // Real-time input validation with visual feedback
+    function setupRealTimeValidation() {
+        const inputs = document.querySelectorAll('input[type="text"], input[type="password"]');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateSingleInput(this);
+            });
+            
+            input.addEventListener('input', function() {
+                // Clear error state on input
+                this.classList.remove('input-error');
+            });
+        });
+    }
+
+    // Validate individual input field
+    function validateSingleInput(input) {
+        const value = input.value.trim();
+        const isPassword = input.type === 'password';
+        const isUsername = input.name === 'username' || input.id.includes('username');
+        
+        let errors = [];
+        
+        if (isUsername) {
+            errors = validateUsername(value);
+        } else if (isPassword) {
+            errors = validatePassword(value);
+        }
+        
+        // Update visual state
+        if (errors.length > 0) {
+            input.classList.add('input-error');
+            input.classList.remove('input-success');
+        } else if (value.length > 0) {
+            input.classList.add('input-success');
+            input.classList.remove('input-error');
+        } else {
+            input.classList.remove('input-error', 'input-success');
+        }
+        
+        // Update accessibility help text
+        updateFieldHelp(input, errors);
+        
+        return errors.length === 0;
+    }
+
+    // Update field help text for accessibility
+    function updateFieldHelp(input, errors) {
+        const helpId = input.getAttribute('aria-describedby');
+        if (!helpId) return;
+        
+        const helpElement = document.getElementById(helpId.split(' ')[0]);
+        if (!helpElement) return;
+        
+        if (errors.length > 0) {
+            helpElement.textContent = errors[0];
+            helpElement.className = 'field-help error';
+        } else if (input.value.trim().length > 0) {
+            helpElement.textContent = '✓ Valid';
+            helpElement.className = 'field-help success';
+        } else {
+            helpElement.textContent = '';
+            helpElement.className = 'field-help';
+        }
+    }
+
+    // Enhanced form submission with loading states
+    function setFormLoading(form, isLoading) {
+        const submitButton = form.querySelector('button[type="submit"]');
+        const inputs = form.querySelectorAll('input');
+        
+        if (isLoading) {
+            submitButton.classList.add('loading');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Processing...';
+            inputs.forEach(input => input.disabled = true);
+        } else {
+            submitButton.classList.remove('loading');
+            submitButton.disabled = false;
+            submitButton.textContent = submitButton.dataset.originalText || 'Submit';
+            inputs.forEach(input => input.disabled = false);
+        }
+    }
+
     // Register functionality
     if (registerForm) {
+        // Store original button text
+        const registerButton = registerForm.querySelector('button[type="submit"]');
+        registerButton.dataset.originalText = registerButton.textContent;
+        
         registerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const username = event.target['register-username'].value;
@@ -291,6 +401,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Set loading state
+            setFormLoading(registerForm, true);
             displayMessage('Attempting registration...', 'info');
 
             try {
@@ -318,7 +430,13 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 displayMessage(`Network error during registration: ${error.message}`, 'error');
                 console.error('Network error:', error);
+            } finally {
+                // Clear loading state
+                setFormLoading(registerForm, false);
             }
         });
     }
+
+    // Initialize real-time validation
+    setupRealTimeValidation();
 });

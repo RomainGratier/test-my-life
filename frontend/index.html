@@ -33,12 +33,23 @@
             <div id="login-section">
                 <div class="auth-card">
                     <h3>Login</h3>
-                    <form id="login-form">
-                        <label for="login-username">Username:</label>
-                        <input type="text" id="login-username" name="username" required>
-                        <label for="login-password">Password:</label>
-                        <input type="password" id="login-password" name="password" required>
-                        <button type="submit">Login</button>
+                    <form id="login-form" role="form" aria-label="User login form">
+                        <div class="form-group">
+                            <label for="login-username">Username:</label>
+                            <input type="text" id="login-username" name="username" required 
+                                   aria-describedby="login-username-help" 
+                                   autocomplete="username">
+                            <div id="login-username-help" class="field-help" aria-live="polite"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password:</label>
+                            <input type="password" id="login-password" name="password" required 
+                                   aria-describedby="login-password-help" 
+                                   autocomplete="current-password">
+                            <div id="login-password-help" class="field-help" aria-live="polite"></div>
+                        </div>
+                        <button type="submit" aria-describedby="login-status">Login</button>
+                        <div id="login-status" class="sr-only" aria-live="polite"></div>
                     </form>
                 </div>
             </div>
@@ -46,14 +57,27 @@
             <div id="register-section">
                 <div class="auth-card">
                     <h3>Register</h3>
-                    <form id="register-form">
-                        <label for="register-username">Username:</label>
-                        <input type="text" id="register-username" name="username" required>
-                        <label for="register-password">Password:</label>
-                        <input type="password" id="register-password" name="password" required>
-                        <button type="submit">Register</button>
+                    <form id="register-form" role="form" aria-label="User registration form">
+                        <div class="form-group">
+                            <label for="register-username">Username:</label>
+                            <input type="text" id="register-username" name="username" required 
+                                   aria-describedby="register-username-help" 
+                                   autocomplete="username">
+                            <div id="register-username-help" class="field-help" aria-live="polite"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password:</label>
+                            <input type="password" id="register-password" name="password" required 
+                                   aria-describedby="register-password-help password-requirements-text" 
+                                   autocomplete="new-password">
+                            <div id="register-password-help" class="field-help" aria-live="polite"></div>
+                        </div>
+                        <button type="submit" aria-describedby="register-status">Register</button>
+                        <div id="register-status" class="sr-only" aria-live="polite"></div>
                     </form>
-                    <p class="password-requirements">⚠️ <strong>Password Requirements:</strong> Minimum 12 characters with uppercase, lowercase, numbers, and special characters (!@#$%^&*())</p>
+                    <div id="password-requirements-text" class="password-requirements" role="region" aria-label="Password requirements">
+                        ⚠️ <strong>Password Requirements:</strong> Minimum 12 characters with uppercase, lowercase, numbers, and special characters (!@#$%^&*())
+                    </div>
                 </div>
             </div>
             
