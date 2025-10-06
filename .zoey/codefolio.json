@@ -1,8 +1,4 @@
 {
-  "version": "1.0.0",
-  "title": "Enterprise Authentication Challenge: Developer Guide",
-  "description": "This codefolio serves as a comprehensive guide for the 'Enterprise Authentication Challenge', outlining the requirements, evaluation criteria, and partially implemented features for developers to complete a production-ready authentication system.",
-  "created_at": "2025-01-27T00:00:00.000Z",
   "highlights": [
     "Implement enterprise-grade security features for authentication",
     "Apply advanced CSS styling and responsive design principles",
