@@ -1,5 +1,6 @@
 {
   "project": "Enterprise Authentication Challenge",
+  "overview": "This comprehensive full-stack authentication challenge evaluates developers' ability to implement enterprise-grade security systems with modern web development practices. The challenge focuses on building a complete authentication flow from scratch, emphasizing security best practices, advanced CSS styling, and production-ready code architecture. Candidates will demonstrate their proficiency in implementing secure password policies, JWT token management, responsive design patterns, and comprehensive error handling while creating a polished user experience.",
   "description": "A comprehensive full-stack authentication challenge testing enterprise-grade security implementation, advanced CSS styling, and modern web development practices. Developers must implement secure password policies, JWT token management, responsive design patterns, and production-ready error handling.",
   "greeting": "Welcome to the Authentication Challenge! 🚀",
   "message": "This challenge tests your ability to implement enterprise-grade authentication systems with specific security requirements, advanced CSS styling, and modern web development patterns. You'll be evaluated on security implementation, UI/UX design, and code architecture.",
